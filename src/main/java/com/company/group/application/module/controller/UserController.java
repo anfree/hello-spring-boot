@@ -34,10 +34,7 @@ public class UserController {
      * @return user
      */
     @PostMapping("/user")
-    public User userAdd(@RequestParam("name") String name, @RequestParam("age") Integer age){
-        User user = new User();
-        user.setName(name);
-        user.setAge(age);
+    public User userAdd(User user){
         return userDao.save(user);
     }
 
