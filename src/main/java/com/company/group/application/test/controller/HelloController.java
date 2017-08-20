@@ -1,4 +1,4 @@
-package com.company.group.application.module.controller;
+package com.company.group.application.test.controller;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RequestMapping;
