@@ -3,10 +3,11 @@ package com.company.group.application.module.entity;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.validation.constraints.Min;
 
 /**
  * 用户实体类
- * Created by 曾祥江 on 2017/6/18 20:11.
+ * Created by 曾祥江 on 2017/6/18.
  * email: zengxiangjaing@aliyun.com
  */
 @Entity
@@ -18,6 +19,7 @@ public class User {
 
     private String name;
 
+    @Min(18)
     private Integer age;
 
     public User() {
@@ -45,5 +47,14 @@ public class User {
 
     public void setAge(Integer age) {
         this.age = age;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", age=" + age +
+                '}';
     }
 }

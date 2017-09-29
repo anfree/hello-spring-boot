@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
  * Spring boot 启动main类
- * Created by 曾祥江 on 2017/6/18 18:35.
+ * Created by 曾祥江 on 2017/6/18
  * email: zengxiangjaing@aliyun.com
  */
 @SpringBootApplication

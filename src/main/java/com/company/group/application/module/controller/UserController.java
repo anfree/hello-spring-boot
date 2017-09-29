@@ -2,21 +2,30 @@ package com.company.group.application.module.controller;
 
 import com.company.group.application.module.dao.UserDao;
 import com.company.group.application.module.entity.User;
+import com.company.group.application.module.exception.UserException;
+import com.company.group.application.module.service.UserService;
+import com.company.group.application.util.Result;
+import com.company.group.application.util.ResultUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 /**
- * Restfull 请求调度层
- * Created by 曾祥江 on 2017/6/18 20:55.
- * email: zengxiangjaing@aliyun.com
+ * hello-spring-boot Restfull 请求调度层
+ * Created by 曾祥江 on 2017/6/18
+ * Email: zengxiangjaing@aliyun.com
  */
 @RestController
 public class UserController {
     private Logger logger = LoggerFactory.getLogger(UserController.class);
+
+    @Autowired
+    private UserService userService;
 
     @Autowired
     private UserDao userDao;
@@ -38,8 +47,12 @@ public class UserController {
      * @return 入库后的对象
      */
     @PostMapping("/user")
-    public User userAdd(User user) {
-        return userDao.save(user);
+    public Result<User> userAdd(@Valid User user, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()){
+            String message = bindingResult.getFieldError().getDefaultMessage();
+            return ResultUtil.fail(0, message);
+        }
+        return ResultUtil.success(userDao.save(user));
     }
 
     /**
@@ -86,6 +99,12 @@ public class UserController {
     @GetMapping("/user/age/{age}")
     public List<User> userListByAge(@PathVariable("age") Integer age) {
         return userDao.findByAge(age);
+    }
+
+    @GetMapping("/user/getAge/{id}")
+    public Result<User> getAge(@PathVariable("id") Integer id) throws UserException {
+        User user = userService.getAge(id);
+        return ResultUtil.success(user);
     }
 
 }
